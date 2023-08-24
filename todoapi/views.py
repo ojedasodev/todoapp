@@ -4,6 +4,16 @@ from rest_framework.decorators import api_view
 from .models import todoItem
 from .serializers import todoSerializer
 
+@api_view(['GET'])
+def app_root(request):
+    # get all endpoints
+    endpoints = {
+        'items':'/todoitems',
+        'delete':'/delete/<int:pk>',
+        'update':'/update/<int:pk>',
+    }
+    return Response(endpoints)
+
 @api_view(['GET', 'POST'])
 def todoItems(request):
     
