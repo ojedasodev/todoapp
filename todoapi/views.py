@@ -36,6 +36,7 @@ def todoItems(request):
     return Response(serializer.data)
 
 @api_view(['PUT', 'PATCH'])
+@permission_classes([IsAuthenticated])
 def updateTodoItem(request, pk):
     todo = todoItem.objects.get(pk=pk)
     serializer = todoSerializer(todo,data=request.data, partial=True)
@@ -45,6 +46,7 @@ def updateTodoItem(request, pk):
     return Response(serializer.errors, status=400)
 
 @api_view(['PUT', 'PATCH'])
+@permission_classes([IsAuthenticated])
 def deleteTodoItem(request, pk):
     todos = todoItem.objects.all()
     todo_to_delete = todos.filter(pk=pk)
